@@ -64,21 +64,27 @@ func parseCIDRUnsafe(s string) *net.IPNet {
 // RangerEntry is an interface for insertable entry into a Ranger.
 type RangerEntry interface {
 	Network() net.IPNet
+	Getcompany() string
 }
 
 type basicRangerEntry struct {
-	ipNet net.IPNet
+	IpNet net.IPNet
+	Company string
 }
 
 func (b *basicRangerEntry) Network() net.IPNet {
-	return b.ipNet
+	return b.IpNet
 }
 
+func (b *basicRangerEntry) Getcompany() string {
+	return b.Company
+}
 // NewBasicRangerEntry returns a basic RangerEntry that only stores the network
 // itself.
-func NewBasicRangerEntry(ipNet net.IPNet) RangerEntry {
+func NewBasicRangerEntry(ipNet net.IPNet, company string) RangerEntry {
 	return &basicRangerEntry{
-		ipNet: ipNet,
+		IpNet: ipNet,
+		Company: company,
 	}
 }
 
